@@ -13,12 +13,15 @@ import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
 
 import BlogList from "../components/UI/BlogList";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const user = useSelector((state) => state.auth);
   return (
     <Helmet title="Home">
       {/* ============= hero section =========== */}
       <section className="p-0 hero__slider-section">
+        <h1>hello {user.username}</h1>
         <HeroSlider />
 
         <div className="hero__form">
