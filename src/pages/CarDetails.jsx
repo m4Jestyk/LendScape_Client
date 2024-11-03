@@ -11,16 +11,22 @@ import axios from "axios";
 const CarDetails = () => {
   const { slug } = useParams();
 
+  const handleRent = async () => {
+    const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/items/rentitem/${slug}`,
+    { withCredentials: true });
+    console.log(res.data);
+  }
+
 
   const [item, setItem] = useState({});
 
-  const fetchItem = async() => {
+  const fetchItem = async () => {
     console.log(slug);
     const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/items/get/${slug}`);
     await setItem(res.data.item);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchItem();
   }, [])
 
@@ -76,16 +82,16 @@ const CarDetails = () => {
                     {item.availableToRent ? <>Item is available to rent!</> : <h5>Unfortunately this item is not available to rent right now :(</h5>}
                   </span>
 
-                  
 
-            
+
+
                 </div>
 
               </div>
             </Col>
 
 
-            <Button>RENT</Button>
+            <Button onClick={handleRent}>RENT</Button>
 
 
             {/* <Col lg="5" className="mt-5">

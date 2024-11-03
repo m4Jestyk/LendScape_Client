@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/slices/authSlice";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ export default function Login() {
   });
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth);
+  const [cookie, setCookie] = useCookies(['jwt']);
 
   
 
@@ -37,6 +39,7 @@ useEffect(()=>{
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(inputs),
       });
 

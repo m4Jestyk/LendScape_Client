@@ -11,6 +11,7 @@ import Contact from "../pages/Contact";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import AddItem from "../pages/AddItem";
 
 const Routers = () => {
   return (
@@ -27,6 +28,7 @@ const Routers = () => {
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/login" element ={<Login/ >}/>
       <Route path="/signup" element ={<Signup/ >}/>
+      <Route path="/additem" element ={<AddItem/ >}/>
     </Routes>
   );
 };
