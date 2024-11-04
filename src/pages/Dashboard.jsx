@@ -4,12 +4,13 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import ItemCard from "../components/UI/ItemCard";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const [itemsOnSale, setItemsOnSale] = useState([]);
   const [itemsLended, setItemsLended] = useState([]);
   const [itemsBorrowed, setItemsBorrowed] = useState([]);
-  const [userId] = useState("672309194929d7cfd14c3dfd");
+  const userId = useSelector(state => state.auth.id);
   const [successMessage, setSuccessMessage] = useState('');
 
   const fetchSaleItems = async () => {

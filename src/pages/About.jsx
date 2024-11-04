@@ -28,21 +28,15 @@ const About = () => {
             <Col lg="6" md="6" sm="12">
               <div className="about__page-content">
                 <h2 className="section__title">
-                  We Are Committed To Provide Safe Ride Solutions
+                Join The LendScape Community
                 </h2>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                Become a part of LendScape today and experience the convenience of sharing. By joining, you’re not only saving money but also contributing to a more resourceful and eco-friendly campus culture. Lend, borrow, and be part of something bigger at IET DAVV.
                 </p>
 
                 <p className="section__description">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Eveniet veniam assumenda aperiam accusantium ex autem
-                  perferendis repellendus nostrum delectus. Nemo et dolore est
-                  tempore rem minima adipisci magni dolorum ipsam.
+                At LendScape, we believe that everyone has something valuable to offer. Our platform encourages a sense of community by allowing students to share items they own but don’t frequently use. This creates a more sustainable environment, helping students save money, avoid unnecessary purchases, and access a wide range of resources that can enhance their academic and campus life.
                 </p>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">

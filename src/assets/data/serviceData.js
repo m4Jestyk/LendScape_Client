@@ -1,44 +1,46 @@
 const serviceData = [
   {
     id: 1,
-    title: "City Transfer",
+    title: "Flexible Rental Periods",
     icon: "ri-map-pin-2-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Enjoy the freedom to choose rental durations that suit your needs, whether for a day, a week, or longer.",
   },
 
   {
     id: 2,
-    title: "Whole  City Tour",
+    title: "Peer Reviews and Ratings",
     icon: "ri-community-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Access honest feedback from fellow users to make informed decisions and find the best resources.",
   },
 
   {
     id: 3,
-    title: "Unlimited Miles Car Rental",
+    title: "Cost Savings on Student Supplies",
     icon: "ri-roadster-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Save money on essential items by borrowing or lending instead of purchasing, promoting affordability and sustainability.",
   },
 
   {
     id: 4,
-    title: "Fast & Easy Booking",
+    title: "Community-Based Problem Solving",
     icon: "ri-timer-flash-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Leverage the collective knowledge of your peers to find solutions and resources tailored to your unique challenges",
+
   },
 
   {
     id: 5,
-    title: "Many Pickup Locations",
+    title: "User Profiles and History Tracking",
     icon: "ri-map-pin-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Keep track of your transactions and interactions through personalized profiles, enhancing your experience and accountability",
+
   },
 
   {
     id: 6,
-    title: "Airport Transfer",
+    title: "Specialized Categories and Filters",
     icon: "ri-flight-takeoff-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Easily navigate and find specific items with organized categories and filters tailored to student needs",
   },
 ];
 

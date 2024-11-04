@@ -6,6 +6,8 @@ import "../../styles/header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/slices/authSlice";
 import axios from "axios";
+import logoImage from "../../assets/all-images/logols.jpg.png";
+
 
 const navLinks = [
   {
@@ -17,8 +19,8 @@ const navLinks = [
     display: "About",
   },
   {
-    path: "/cars",
-    display: "Cars",
+    path: "/products",
+    display: "Products",
   },
 
   {
@@ -107,10 +109,12 @@ const Header = () => {
               <div className="logo">
                 <h1>
                   <Link to="/home" className=" d-flex align-items-center gap-2">
-                    <i class="ri-car-line"></i>
-                    <span>
-                      Rent Car <br /> Service
-                    </span>
+                  <img
+    src={logoImage}
+    alt="LEND-SCAPE"
+    style={{ width: "200px", height: "auto" }}
+/>
+
                   </Link>
                 </h1>
               </div>
@@ -122,8 +126,8 @@ const Header = () => {
                   <i class="ri-earth-line"></i>
                 </span>
                 <div className="header__location-content">
-                  <h4>Bangladesh</h4>
-                  <h6>Sylhet City, Bangladesh</h6>
+                <h4>INDORE</h4>
+                <h6>IET-DAVV</h6>
                 </div>
               </div>
             </Col>
@@ -134,8 +138,8 @@ const Header = () => {
                   <i class="ri-time-line"></i>
                 </span>
                 <div className="header__location-content">
-                  <h4>Sunday to Friday</h4>
-                  <h6>10am - 7pm</h6>
+                <h4>AVAILABLE</h4>
+                <h6>24/7</h6>
                 </div>
               </div>
             </Col>

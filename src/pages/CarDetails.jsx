@@ -9,6 +9,7 @@ const CarDetails = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState({});
   const [showSuccess, setShowSuccess] = useState(false); // To show success message modal
+  const [publishUser, setPublishUser] = useState({});
 
   const fetchItem = async () => {
     try {
@@ -18,6 +19,17 @@ const CarDetails = () => {
       console.error("Error fetching item:", error);
     }
   };
+
+  const fetchPublishUser = async() => {
+    try {
+        console.log("CALLED ================================")
+        const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/users/${item.sellerID}`);
+        console.log("publish response: ",res.data);
+        setPublishUser(res.data);
+    } catch (error) {
+      console.log("Error while fetching user")
+    }
+  }
 
   const handleRent = async () => {
     try {
@@ -44,73 +56,114 @@ const CarDetails = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    fetchPublishUser();
+  }, [item])
+
   const closeSuccessModal = () => {
     setShowSuccess(false);
     navigate("/"); // Redirect to homepage
   };
 
   return (
-    <Helmet title={item.name}>
+
+<Helmet title={item.name}>
       <section>
         <Container>
           <Row>
             <Col lg="6">
-              <img src={item.imgUrl} alt={item.name} className="w-100" />
+              <img src={item.imgUrl} alt="" className="w-100" />
             </Col>
 
             <Col lg="6">
               <div className="car__info">
                 <h2 className="section__title">{item.name}</h2>
 
-                <div className="d-flex align-items-center gap-5 mb-4 mt-3">
+                <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    Rs - {item.priceByTenure}.00 / Month
+                    {item.priceByTenure} Rs / Month
                   </h6>
 
-                  <span className="d-flex align-items-center gap-2">
+                  <span className=" d-flex align-items-center gap-2">
                     <span style={{ color: "#f9a826" }}>
-                      <i className="ri-star-s-fill"></i>
+                      <i class="ri-star-s-fill"></i>
                     </span>
-                    ({item.stars} stars)
+                    {item.stars} Star(s)
                   </span>
                 </div>
 
-                <p className="section__description">{item.description}</p>
+                <p className="section__description">
+                  {item.description}
+                </p>
 
-                <div className="d-flex align-items-center mt-3" style={{ columnGap: "4rem" }}>
-                  <span className="d-flex align-items-center gap-1 section__description">
-                    <i className="ri-roadster-line" style={{ color: "#f9a826" }}></i>
-                    Category: {item.category}
+                <p className="section__description">
+                  Published By : {publishUser.username}
+                </p>
+
+                <p className="section__description">
+                  {item.age} Year(s) old
+                </p>
+
+                <div
+                  className=" d-flex align-items-center mt-3"
+                  style={{ columnGap: "4rem" }}
+                >
+                  <span className=" d-flex align-items-center gap-1 section__description">
+                    <i
+                      class="ri-roadster-line"
+                      style={{ color: "#f9a826" }}
+                    ></i>{" "}
+                    Category : {item.category}
+                  </span>
+
+                  <span className=" d-flex align-items-center gap-1 section__description">
+                    <i
+                      class="ri-roadster-line"
+                      style={{ color: "#f9a826" }}
+                    ></i>{" "}
+                    Times Rented : {item.timesRented}
                   </span>
 
                   <span className="d-flex align-items-center gap-1 section__description">
-                    {item.availableToRent ? "Item is available to rent!" : "Item is currently unavailable to rent."}
-                  </span>
+                     {item.availableToRent ? "Item is available to rent!" : "Item is currently unavailable to rent."}
+                   </span>
+
+                  
+                  
+                </div>
+
+                <div
+                  className=" d-flex align-items-center mt-3"
+                  style={{ columnGap: "2.8rem" }}
+                >
+                  
                 </div>
               </div>
             </Col>
 
             <Button onClick={handleRent} disabled={!item.availableToRent}>
-  {item.availableToRent ? "Rent" : "Not available at the moment"}
-</Button>
+   {item.availableToRent ? "Rent" : "Not available at the moment"}
+ </Button>
 
-          </Row>
 
           {/* Success Message Modal */}
-          <Modal isOpen={showSuccess} toggle={closeSuccessModal}>
-            <ModalBody>
-              <h4>Success!</h4>
-              <p>The item has been successfully rented. Would you like to browse more items?</p>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={closeSuccessModal}>
-                Go to Homepage
-              </Button>
-              <Button color="secondary" onClick={() => setShowSuccess(false)}>
-                Continue Browsing
-              </Button>
-            </ModalFooter>
-          </Modal>
+           <Modal isOpen={showSuccess} toggle={closeSuccessModal}>
+             <ModalBody>
+               <h4>Success!</h4>
+               <p>The item has been successfully rented. Would you like to browse more items?</p>
+             </ModalBody>
+             <ModalFooter>
+               <Button color="primary" onClick={closeSuccessModal}>
+                 Go to Homepage
+               </Button>
+               <Button color="secondary" onClick={() => setShowSuccess(false)}>
+                 Continue Browsing
+               </Button>
+             </ModalFooter>
+           </Modal>
+
+            
+          </Row>
         </Container>
       </section>
     </Helmet>
