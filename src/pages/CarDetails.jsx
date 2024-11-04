@@ -9,20 +9,26 @@ import PaymentMethod from "../components/UI/PaymentMethod";
 import axios from "axios";
 
 const CarDetails = () => {
-  const { slug } = useParams();
+  const { itemid } = useParams();
 
   const handleRent = async () => {
-    const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/items/rentitem/${slug}`,
-    { withCredentials: true });
-    console.log(res.data);
+  //   const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/items/rentitem/${itemid}`,
+  //   { withCredentials: true }
+  // );
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER}/api/v1/items/rentitem`,
+    { itemid },  // Send itemid as part of the request body
+    { withCredentials: true }
+  );
+  console.log(response.data);
   }
 
 
   const [item, setItem] = useState({});
 
   const fetchItem = async () => {
-    console.log(slug);
-    const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/items/get/${slug}`);
+    console.log(itemid);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/items/get/${itemid}`);
     await setItem(res.data.item);
   }
 
