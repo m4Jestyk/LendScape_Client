@@ -1,15 +1,19 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardText, CardSubtitle, Button } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, showReturnButton, onReturn }) => {
   return (
-    <Card className="mb-4">
+    <Card>
       <CardBody>
         <CardTitle tag="h5">{item.name}</CardTitle>
-        <CardSubtitle className="mb-2 text-muted">Price: Rs.{item.priceByTenure}</CardSubtitle>
-        <CardSubtitle className="mb-2 text-muted">Category: {item.category}</CardSubtitle>
         <CardText>{item.description}</CardText>
-        <Button color="primary">View Details</Button>
+        <CardText>Category: {item.category}</CardText>
+        <CardText>Condition: {item.condition} / 10</CardText>
+        {showReturnButton && (
+          <Button color="danger" onClick={onReturn}>
+            Return item
+          </Button>
+        )}
       </CardBody>
     </Card>
   );

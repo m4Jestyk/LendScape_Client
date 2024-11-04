@@ -1,45 +1,53 @@
 import React, { useEffect, useState } from "react";
-
-import carData from "../assets/data/carData";
-import { Container, Row, Col, Button } from "reactstrap";
-import Helmet from "../components/Helmet/Helmet";
-import { useParams } from "react-router-dom";
-import BookingForm from "../components/UI/BookingForm";
-import PaymentMethod from "../components/UI/PaymentMethod";
+import { Container, Row, Col, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Helmet from "../components/Helmet/Helmet";
 
 const CarDetails = () => {
   const { itemid } = useParams();
-
-  const handleRent = async () => {
-  //   const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/items/rentitem/${itemid}`,
-  //   { withCredentials: true }
-  // );
-  const response = await axios.post(
-    `${process.env.REACT_APP_SERVER}/api/v1/items/rentitem`,
-    { itemid },  // Send itemid as part of the request body
-    { withCredentials: true }
-  );
-  console.log(response.data);
-  }
-
-
+  const navigate = useNavigate();
   const [item, setItem] = useState({});
+  const [showSuccess, setShowSuccess] = useState(false); // To show success message modal
 
   const fetchItem = async () => {
-    console.log(itemid);
-    const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/items/get/${itemid}`);
-    await setItem(res.data.item);
-  }
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/items/get/${itemid}`);
+      setItem(res.data.item);
+    } catch (error) {
+      console.error("Error fetching item:", error);
+    }
+  };
+
+  const handleRent = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER}/api/v1/items/rentitem`,
+        { itemid },
+        { withCredentials: true }
+      );
+      console.log(response.data);
+
+      if (response.data.success) {
+        setShowSuccess(true); // Show success message modal
+      } else {
+        alert(response.data.message || "Failed to rent item. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error renting item:", error);
+      alert("An error occurred while renting the item.");
+    }
+  };
 
   useEffect(() => {
     fetchItem();
-  }, [])
-
-  useEffect(() => {
     window.scrollTo(0, 0);
-    console.log("ITEM FOUND========================", item);
-  }, [item]);
+  }, []);
+
+  const closeSuccessModal = () => {
+    setShowSuccess(false);
+    navigate("/"); // Redirect to homepage
+  };
 
   return (
     <Helmet title={item.name}>
@@ -47,66 +55,62 @@ const CarDetails = () => {
         <Container>
           <Row>
             <Col lg="6">
-              <img src={item.imgUrl} alt="" className="w-100" />
+              <img src={item.imgUrl} alt={item.name} className="w-100" />
             </Col>
 
             <Col lg="6">
               <div className="car__info">
                 <h2 className="section__title">{item.name}</h2>
 
-                <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
+                <div className="d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
                     Rs - {item.priceByTenure}.00 / Month
                   </h6>
 
-                  <span className=" d-flex align-items-center gap-2">
+                  <span className="d-flex align-items-center gap-2">
                     <span style={{ color: "#f9a826" }}>
-                      <i class="ri-star-s-fill"></i>
+                      <i className="ri-star-s-fill"></i>
                     </span>
                     ({item.stars} stars)
                   </span>
                 </div>
 
-                <p className="section__description">
-                  {item.description}
-                </p>
+                <p className="section__description">{item.description}</p>
 
-                <div
-                  className=" d-flex align-items-center mt-3"
-                  style={{ columnGap: "4rem" }}
-                >
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-roadster-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    Category : {" "}
-                    {item.category}
+                <div className="d-flex align-items-center mt-3" style={{ columnGap: "4rem" }}>
+                  <span className="d-flex align-items-center gap-1 section__description">
+                    <i className="ri-roadster-line" style={{ color: "#f9a826" }}></i>
+                    Category: {item.category}
                   </span>
 
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    {item.availableToRent ? <>Item is available to rent!</> : <h5>Unfortunately this item is not available to rent right now :(</h5>}
+                  <span className="d-flex align-items-center gap-1 section__description">
+                    {item.availableToRent ? "Item is available to rent!" : "Item is currently unavailable to rent."}
                   </span>
-
-
-
-
                 </div>
-
               </div>
             </Col>
 
+            <Button onClick={handleRent} disabled={!item.availableToRent}>
+  {item.availableToRent ? "Rent" : "Not available at the moment"}
+</Button>
 
-            <Button onClick={handleRent}>RENT</Button>
-
-
-            {/* <Col lg="5" className="mt-5">
-              <div className="payment__info mt-5">
-                <h5 className="mb-4 fw-bold ">Payment Information</h5>
-                <PaymentMethod />
-              </div>
-            </Col> */}
           </Row>
+
+          {/* Success Message Modal */}
+          <Modal isOpen={showSuccess} toggle={closeSuccessModal}>
+            <ModalBody>
+              <h4>Success!</h4>
+              <p>The item has been successfully rented. Would you like to browse more items?</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={closeSuccessModal}>
+                Go to Homepage
+              </Button>
+              <Button color="secondary" onClick={() => setShowSuccess(false)}>
+                Continue Browsing
+              </Button>
+            </ModalFooter>
+          </Modal>
         </Container>
       </section>
     </Helmet>
