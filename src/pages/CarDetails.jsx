@@ -101,6 +101,10 @@ const CarDetails = () => {
                 </p>
 
                 <p className="section__description">
+                  Contact the Lender here : {publishUser.contactNumber}
+                </p>
+
+                <p className="section__description">
                   {item.age} Year(s) old
                 </p>
 

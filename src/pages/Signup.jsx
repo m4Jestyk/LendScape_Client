@@ -11,6 +11,7 @@ export default function Signup() {
         username: "",
         password: "",
         email: "",
+        contactNumber: ""
     });
     const user = useSelector((state) => state.auth);
 
@@ -85,7 +86,7 @@ export default function Signup() {
                             WebkitBackgroundClip: "text",
                             color: "transparent"
                         }}>!</span></h2>
-                        <p style={{ color: "#666" }}>You can be anonymous, all we want is your email and a strong password &gt;:)</p>
+                        <p style={{ color: "#666" }}>Let us create an account for you!</p>
                         <p onClick={() => navigate("/login")} style={{ color: "green", cursor: "pointer" }}>Already a member? Click me!!</p>
                     </div>
 
@@ -113,6 +114,16 @@ export default function Signup() {
                         <input
                             onChange={(e) => setInputs(inputs => ({ ...inputs, email: e.target.value }))}
                             placeholder="email@something.whatever"
+                            style={{
+                                padding: "10px",
+                                backgroundColor: "#f3f3f3",
+                                border: "1px solid #ddd",
+                                borderRadius: "5px"
+                            }}
+                        />
+                        <input
+                            onChange={(e) => setInputs(inputs => ({ ...inputs, contactNumber: e.target.value }))}
+                            placeholder="Contact Number"
                             style={{
                                 padding: "10px",
                                 backgroundColor: "#f3f3f3",

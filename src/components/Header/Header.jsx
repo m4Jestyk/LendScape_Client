@@ -91,6 +91,14 @@ const Header = () => {
                   </Button>
                 )}
 
+                {user.email !== "" ? <Button onClick={()=> navigate("/additem")} className=" d-flex align-items-center gap-1">
+                  <i class="ri-user-line"></i> Put an item on Sale
+                </Button> : <></>}
+
+                {user.email !== "" ? <Button onClick={()=> navigate("/dashboard")} className=" d-flex align-items-center gap-1">
+                  <i class="ri-user-line"></i> Dashboard
+                </Button> : <></>}
+
 
                 {user.email === "" ? <Button onClick={()=> navigate("/signup")} className=" d-flex align-items-center gap-1">
                   <i class="ri-user-line"></i> Register
