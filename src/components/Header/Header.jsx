@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
 
-import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Container, Row, Col, Button } from "reactstrap";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../../styles/header.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/slices/authSlice";
+import axios from "axios";
 
 const navLinks = [
   {
@@ -31,6 +34,35 @@ const navLinks = [
 const Header = () => {
   const menuRef = useRef(null);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/users/logout`,
+      {},
+      { withCredentials: true }
+    );
+
+    if (res.data.success) {
+      localStorage.setItem("auth", JSON.stringify({
+        id: null,
+        email: "",
+        username: "",
+      }));
+
+      dispatch(setUser({
+        id: null,
+        email: "",
+        username: "",
+      }));
+      navigate("/");
+      // window.location.reload();
+    }
+    console.log(res.data);
+  }
+
+  const user = useSelector(state => state.auth);
+
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
   return (
@@ -41,22 +73,26 @@ const Header = () => {
           <Row>
             <Col lg="6" md="6" sm="6">
               <div className="header__top__left">
-                <span>Need Help?</span>
-                <span className="header__top__help">
-                  <i class="ri-phone-fill"></i> +1-202-555-0149
-                </span>
+                LendScape Beta
               </div>
             </Col>
 
             <Col lg="6" md="6" sm="6">
               <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i class="ri-login-circle-line"></i> Login
-                </Link>
+                {user.email === "" ? (
+                  <Button className="d-flex align-items-center gap-1" onClick={() => navigate("/login")}>
+                    <i className="ri-login-circle-line"></i> Login
+                  </Button>
+                ) : (
+                  <Button className="d-flex align-items-center gap-1" onClick={handleLogout}>
+                    <i className="ri-login-circle-line"></i> Logout
+                  </Button>
+                )}
 
-                <Link to="#" className=" d-flex align-items-center gap-1">
+
+                {user.email === "" ? <Button onClick={()=> navigate("/signup")} className=" d-flex align-items-center gap-1">
                   <i class="ri-user-line"></i> Register
-                </Link>
+                </Button> : <></>}
               </div>
             </Col>
           </Row>
