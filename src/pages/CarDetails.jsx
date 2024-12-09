@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Helmet from "../components/Helmet/Helmet";
@@ -20,16 +28,14 @@ const CarDetails = () => {
     }
   };
 
-  const fetchPublishUser = async() => {
+  const fetchPublishUser = async () => {
     try {
-        console.log("CALLED ================================")
-        const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/users/${item.sellerID}`);
-        console.log("publish response: ",res.data);
-        setPublishUser(res.data);
+      const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/users/${item.sellerID}`);
+      setPublishUser(res.data);
     } catch (error) {
-      console.log("Error while fetching user")
+      console.log("Error while fetching user");
     }
-  }
+  };
 
   const handleRent = async () => {
     try {
@@ -38,10 +44,9 @@ const CarDetails = () => {
         { itemid },
         { withCredentials: true }
       );
-      console.log(response.data);
 
       if (response.data.success) {
-        setShowSuccess(true); // Show success message modal
+        setShowSuccess(true);
       } else {
         alert(response.data.message || "Failed to rent item. Please try again.");
       }
@@ -57,117 +62,107 @@ const CarDetails = () => {
   }, []);
 
   useEffect(() => {
-    fetchPublishUser();
-  }, [item])
+    if (item.sellerID) {
+      fetchPublishUser();
+    }
+  }, [item]);
 
   const closeSuccessModal = () => {
     setShowSuccess(false);
-    navigate("/"); // Redirect to homepage
+    navigate("/");
   };
 
   return (
-
-<Helmet title={item.name}>
-      <section>
+    <Helmet title={item.name}>
+      <section className="car-details-section">
         <Container>
           <Row>
-            <Col lg="6">
-              <img src={item.imgUrl} alt="" className="w-100" />
+            <Col lg="6" className="mb-4">
+              <img
+                src={item.imgUrl}
+                alt={item.name}
+                className="w-100 rounded shadow"
+                style={{ maxHeight: "400px", objectFit: "cover" }}
+              />
             </Col>
 
             <Col lg="6">
-              <div className="car__info">
-                <h2 className="section__title">{item.name}</h2>
+              <div className="car__info p-3 rounded shadow-sm">
+                <h2 className="section__title mb-3">{item.name}</h2>
 
-                <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
-                  <h6 className="rent__price fw-bold fs-4">
+                <div className="d-flex align-items-center gap-4 mb-4">
+                  <h6 className="rent__price text-primary fw-bold fs-4">
                     {item.priceByTenure} Rs / Month
                   </h6>
-
-                  <span className=" d-flex align-items-center gap-2">
-                    <span style={{ color: "#f9a826" }}>
-                      <i class="ri-star-s-fill"></i>
-                    </span>
+                  <span className="d-flex align-items-center gap-2">
+                    <i className="ri-star-s-fill text-warning"></i>
                     {item.stars} Star(s)
                   </span>
                 </div>
 
-                <p className="section__description">
-                  {item.description}
+                <p className="text-muted mb-2">
+                  <strong>Description:</strong> {item.description}
+                </p>
+                <p className="text-muted mb-2">
+                  <strong>Published By:</strong> {publishUser.username || "N/A"}
+                </p>
+                <p className="text-muted mb-2">
+                  <strong>Contact:</strong> {publishUser.contactNumber || "N/A"}
+                </p>
+                <p className="text-muted mb-2">
+                  <strong>Age:</strong> {item.age} Year(s) old
                 </p>
 
-                <p className="section__description">
-                  Published By : {publishUser.username}
-                </p>
-
-                <p className="section__description">
-                  Contact the Lender here : {publishUser.contactNumber}
-                </p>
-
-                <p className="section__description">
-                  {item.age} Year(s) old
-                </p>
-
-                <div
-                  className=" d-flex align-items-center mt-3"
-                  style={{ columnGap: "4rem" }}
-                >
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-roadster-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    Category : {item.category}
+                <div className="d-flex flex-column gap-2 mt-4">
+                  <span>
+                    <i className="ri-list-check"></i> <strong>Category:</strong>{" "}
+                    {item.category}
                   </span>
-
-                  <span className=" d-flex align-items-center gap-1 section__description">
-                    <i
-                      class="ri-roadster-line"
-                      style={{ color: "#f9a826" }}
-                    ></i>{" "}
-                    Times Rented : {item.timesRented}
+                  <span>
+                    <i className="ri-repeat-line"></i> <strong>Times Rented:</strong>{" "}
+                    {item.timesRented}
                   </span>
-
-                  <span className="d-flex align-items-center gap-1 section__description">
-                     {item.availableToRent ? "Item is available to rent!" : "Item is currently unavailable to rent."}
-                   </span>
-
-                  
-                  
+                  <span>
+                    {item.availableToRent ? (
+                      <span className="text-success fw-bold">
+                        <i className="ri-checkbox-circle-line"></i> Available to Rent
+                      </span>
+                    ) : (
+                      <span className="text-danger fw-bold">
+                        <i className="ri-close-circle-line"></i> Currently Unavailable
+                      </span>
+                    )}
+                  </span>
                 </div>
 
-                <div
-                  className=" d-flex align-items-center mt-3"
-                  style={{ columnGap: "2.8rem" }}
+                <Button
+                  color={item.availableToRent ? "primary" : "secondary"}
+                  className="mt-4"
+                  disabled={!item.availableToRent}
+                  onClick={handleRent}
                 >
-                  
-                </div>
+                  {item.availableToRent ? "Rent" : "Not Available"}
+                </Button>
               </div>
             </Col>
-
-            <Button onClick={handleRent} disabled={!item.availableToRent}>
-   {item.availableToRent ? "Rent" : "Not available at the moment"}
- </Button>
-
+          </Row>
 
           {/* Success Message Modal */}
-           <Modal isOpen={showSuccess} toggle={closeSuccessModal}>
-             <ModalBody>
-               <h4>Success!</h4>
-               <p>The item has been successfully rented. Would you like to browse more items?</p>
-             </ModalBody>
-             <ModalFooter>
-               <Button color="primary" onClick={closeSuccessModal}>
-                 Go to Homepage
-               </Button>
-               <Button color="secondary" onClick={() => setShowSuccess(false)}>
-                 Continue Browsing
-               </Button>
-             </ModalFooter>
-           </Modal>
-
-            
-          </Row>
+          <Modal isOpen={showSuccess} toggle={closeSuccessModal}>
+            <ModalBody>
+              <h4 className="text-success">Success!</h4>
+              <p>The item has been successfully rented.</p>
+              <p>Would you like to browse more items?</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={closeSuccessModal}>
+                Go to Homepage
+              </Button>
+              <Button color="secondary" onClick={() => setShowSuccess(false)}>
+                Continue Browsing
+              </Button>
+            </ModalFooter>
+          </Modal>
         </Container>
       </section>
     </Helmet>

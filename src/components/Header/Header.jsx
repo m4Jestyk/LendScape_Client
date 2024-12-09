@@ -75,8 +75,15 @@ const Header = () => {
           <Row>
             <Col lg="6" md="6" sm="6">
               <div className="header__top__left">
-                LendScape Beta
+                L E N D S C A P E beta
               </div>
+
+              {
+              user ? <div className="header__top__left">
+                Hi {user.username}!
+              </div>
+              :
+              <></>}
             </Col>
 
             <Col lg="6" md="6" sm="6">

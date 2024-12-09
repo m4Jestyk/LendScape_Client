@@ -12,12 +12,14 @@ import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import AddItem from "../pages/AddItem";
+import ImageTest from "../pages/ImageTest";
 
 const Routers = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/imgtest" element ={<ImageTest/ >}/>
       <Route path="/about" element={<About />} />
       <Route path="/products" element={<CarListing />} />
       <Route path="/products/:itemid" element={<CarDetails />} />
@@ -29,6 +31,7 @@ const Routers = () => {
       <Route path="/login" element ={<Login/ >}/>
       <Route path="/signup" element ={<Signup/ >}/>
       <Route path="/additem" element ={<AddItem/ >}/>
+  
     </Routes>
   );
 };

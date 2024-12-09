@@ -45,7 +45,7 @@ const HeroSlider = () => {
         </Container>
       </div>
 
-      <div className="slider__item slider__item-03 mt0">
+      <div className="slider__item slider__item-03 mt0"> 
         <Container>
           <div className="slider__content ">
             {/* <h4 className="text-light mb-3">For Rent $70 Per Day</h4> */}
