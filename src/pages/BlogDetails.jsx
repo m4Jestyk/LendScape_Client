@@ -58,9 +58,7 @@ const BlogDetails = () => {
                     <h6 className=" fw-bold">David Visa</h6>
                     <p className="section__description mb-0">14 July, 2022</p>
                     <p className="section__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Eos nobis totam eius laborum molestias itaque minima
-                      distinctio, quae velit tempore!
+                      Loved it!
                     </p>
 
                     <span className="replay d-flex align-items-center gap-1">
@@ -107,7 +105,7 @@ const BlogDetails = () => {
                   <div className="recent__blog-item d-flex gap-3">
                     <img src={item.imgUrl} alt="" className="w-25 rounded-2" />
                     <h6>
-                      <Link to={`/blogs/${item.title}`}>{blog.title}</Link>
+                      <Link to={`/blogs/${item.title}`}>{item.title}</Link>
                     </h6>
                   </div>
                 </div>

@@ -55,8 +55,8 @@ const CarListing = () => {
   }, []);
 
   return (
-    <Helmet title="Car Listing">
-      <CommonSection title="Car Listing" />
+    <Helmet title="Product Listing">
+      <CommonSection title="Product Listing" />
 
       <section>
         <Container>

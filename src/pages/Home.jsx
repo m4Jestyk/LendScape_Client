@@ -13,12 +13,13 @@ import BlogList from "../components/UI/BlogList";
 
 const Home = () => {
   const user = useSelector((state) => state.auth);
+
   const [items, setItems] = useState([]);
 
   const fetchItems = async () => {
     try {
       const res = await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/items/allitems`);
-      setItems(res.data.items); // Update state with fetched items
+      setItems(res.data.items);  // Update state with fetched items
     } catch (error) {
       console.error("Error fetching items:", error);
     }
@@ -27,120 +28,84 @@ const Home = () => {
   useEffect(() => {
     fetchItems();
   }, []);
-
   return (
     <Helmet title="Home">
-      {/* Hero Section */}
-      <section
-        style={{
-          background: "linear-gradient(to right, #6a11cb, #2575fc)",
-          color: "white",
-          textAlign: "center",
-          padding: "50px 0",
-        }}
-      >
-        <h1 style={{ fontSize: "3rem", marginBottom: "20px", fontFamily: "sans-serif" }}>
-          It's so good to see you, {user.username}!
-        </h1>
-        <HeroSlider />
+      {/* ============= hero section =========== */}
+      <section className="p-0 hero__slider-section">
+      <h1 className="text-dark mb-4">
+  {/* <span style={{
+    color: "#2c3e50", // Darker shade for contrast
+    fontWeight: "bold",
+    fontSize: "2rem", // Increase size
+    fontStyle: "italic",
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", // Soft shadow
+    letterSpacing: "1px", // Slight spacing for readability
+    marginLeft: "470px"
+  }}>
+    It's so good to see you! {user.username}
+  </span>  */}
+  
+</h1>
+<HeroSlider />
+
       </section>
-
-      {/* About Section */}
+      {/* =========== about section ================ */}
       <AboutSection />
-
-      {/* Services Section */}
-      <section style={{ padding: "50px 0", backgroundColor: "#f9f9f9" }}>
+      {/* ========== services section ============ */}
+      <section>
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6
-                style={{
-                  color: "#999",
-                  fontSize: "1.2rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "2px",
-                }}
-              >
-                Explore More
-              </h6>
-              <h2 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>
-                There Is More To Rent In
-              </h2>
+            <h6 className="section__subtitle"></h6>
+            <h2 className="section__title">There Is More To Rent In</h2>
             </Col>
+
             <ServicesList />
           </Row>
         </Container>
       </section>
-
-      {/* Best Sellers Section */}
-      <section style={{ padding: "50px 0" }}>
+      {/* =========== car offer section ============= */}
+      <section>
         <Container>
           <Row>
             <Col lg="12" className="text-center mb-5">
-              <h6
-                style={{
-                  color: "#999",
-                  fontSize: "1.2rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "2px",
-                }}
-              >
-                Come With
-              </h6>
-              <h2 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>Best Sellers</h2>
+              <h6 className="section__subtitle">Come with</h6>
+              <h2 className="section__title">Best Sellers</h2>
             </Col>
-            {items.slice(0, 20).map((item) => (
-              <CarItem item={item} key={item._id} />
+
+            {items.slice(0, 6).map((item) => (
+                <CarItem item={item} key={item._id} />
+
             ))}
           </Row>
         </Container>
       </section>
+      {/* =========== become a driver section ============ */}
+      {/* <BecomeDriverSection /> */}
 
-      {/* Testimonial Section */}
-      <section
-        style={{
-          padding: "50px 0",
-          background: "linear-gradient(to right, #ff7e5f, #feb47b)",
-          color: "white",
-        }}
-      >
+      {/* =========== testimonial section =========== */}
+      <section>
         <Container>
           <Row>
             <Col lg="12" className="mb-4 text-center">
-              <h6
-                style={{
-                  color: "#fefefe",
-                  fontSize: "1.2rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "2px",
-                }}
-              >
-                Our Clients Say
-              </h6>
-              <h2 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>Reviews</h2>
+              <h6 className="section__subtitle">Our clients says</h6>
+              <h2 className="section__title">Reviews</h2>
             </Col>
+
             <Testimonial />
           </Row>
         </Container>
       </section>
 
-      {/* Blog Section */}
-      <section style={{ padding: "50px 0", backgroundColor: "#f9f9f9" }}>
+      {/* =============== blog section =========== */}
+      <section>
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6
-                style={{
-                  color: "#999",
-                  fontSize: "1.2rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "2px",
-                }}
-              >
-                Explore Our Blogs
-              </h6>
-              <h2 style={{ fontSize: "2.5rem", fontWeight: "bold" }}>Latest Blogs</h2>
+              <h6 className="section__subtitle">Explore our blogs</h6>
+              <h2 className="section__title">Latest Blogs</h2>
             </Col>
+
             <BlogList />
           </Row>
         </Container>

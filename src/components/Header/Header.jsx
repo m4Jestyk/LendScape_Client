@@ -67,6 +67,14 @@ const Header = () => {
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
+  const handleSearch = () => {             //IMPLEMENT SEARCH FUNCTION
+    try {
+      
+    } catch (error) {
+      console.log("Error in search module");
+    }
+  }
+
   return (
     <header className="header">
       {/* ============ header top ============ */}
@@ -78,12 +86,12 @@ const Header = () => {
                 L E N D S C A P E beta
               </div>
 
-              {
-              user ? <div className="header__top__left">
-                Hi {user.username}!
-              </div>
-              :
-              <></>}
+              {/* {
+                user ? <div className="header__top__left">
+                  Hi {user.username}!
+                </div>
+                  : 
+                  <p></p>} */}
             </Col>
 
             <Col lg="6" md="6" sm="6">
@@ -98,16 +106,16 @@ const Header = () => {
                   </Button>
                 )}
 
-                {user.email !== "" ? <Button onClick={()=> navigate("/additem")} className=" d-flex align-items-center gap-1">
+                {user.email !== "" ? <Button onClick={() => navigate("/additem")} className=" d-flex align-items-center gap-1">
                   <i class="ri-user-line"></i> Put an item on Sale
                 </Button> : <></>}
 
-                {user.email !== "" ? <Button onClick={()=> navigate("/dashboard")} className=" d-flex align-items-center gap-1">
+                {user.email !== "" ? <Button onClick={() => navigate("/dashboard")} className=" d-flex align-items-center gap-1">
                   <i class="ri-user-line"></i> Dashboard
                 </Button> : <></>}
 
 
-                {user.email === "" ? <Button onClick={()=> navigate("/signup")} className=" d-flex align-items-center gap-1">
+                {user.email === "" ? <Button onClick={() => navigate("/signup")} className=" d-flex align-items-center gap-1">
                   <i class="ri-user-line"></i> Register
                 </Button> : <></>}
               </div>
@@ -124,11 +132,11 @@ const Header = () => {
               <div className="logo">
                 <h1>
                   <Link to="/home" className=" d-flex align-items-center gap-2">
-                  <img
-    src={logoImage}
-    alt="LEND-SCAPE"
-    style={{ width: "200px", height: "auto" }}
-/>
+                    <img
+                      src={logoImage}
+                      alt="LEND-SCAPE"
+                      style={{ width: "200px", height: "auto" }}
+                    />
 
                   </Link>
                 </h1>
@@ -141,8 +149,8 @@ const Header = () => {
                   <i class="ri-earth-line"></i>
                 </span>
                 <div className="header__location-content">
-                <h4>INDORE</h4>
-                <h6>IET-DAVV</h6>
+                  <h4>INDORE</h4>
+                  <h6>IET-DAVV</h6>
                 </div>
               </div>
             </Col>
@@ -153,8 +161,8 @@ const Header = () => {
                   <i class="ri-time-line"></i>
                 </span>
                 <div className="header__location-content">
-                <h4>AVAILABLE</h4>
-                <h6>24/7</h6>
+                  <h4>AVAILABLE</h4>
+                  <h6>24/7</h6>
                 </div>
               </div>
             </Col>
@@ -167,7 +175,7 @@ const Header = () => {
             >
               <button className="header__btn btn ">
                 <Link to="/contact">
-                  <i class="ri-phone-line"></i> Request a call
+                  <i class="ri-phone-line"></i> Connect with us
                 </Link>
               </button>
             </Col>
@@ -178,7 +186,9 @@ const Header = () => {
       {/* ========== main navigation =========== */}
 
       <div className="main__navbar">
-        <Container>
+        <Container style={{
+          // marginLeft: "550px"
+        }}>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
               <i class="ri-menu-line" onClick={toggleMenu}></i>
@@ -202,9 +212,15 @@ const Header = () => {
 
             <div className="nav__right">
               <div className="search__box">
-                <input type="text" placeholder="Search" />
+                {/* <input type="text" placeholder="Search" /> */}
                 <span>
-                  <i class="ri-search-line"></i>
+                  {/* <i onClick={handleSearch} class="ri-search-line"></i> */}
+                  {
+                    user.username !== ""?
+                    <>User : {user.username}</>
+                    :
+                    <>Login to rent!</>
+                  }
                 </span>
               </div>
             </div>

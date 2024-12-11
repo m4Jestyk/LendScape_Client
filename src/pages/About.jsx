@@ -21,7 +21,7 @@ const About = () => {
           <Row>
             <Col lg="6" md="6" sm="12">
               <div className="about__page-img">
-                <img src={driveImg} alt="" className="w-100 rounded-3" />
+                <img src= "/JoinLS.jpeg" alt="" className="w-100 rounded-3" />
               </div>
             </Col>
 
@@ -46,7 +46,7 @@ const About = () => {
 
                   <div>
                     <h6 className="section__subtitle">Need Any Help?</h6>
-                    <h4>+00123456789</h4>
+                    <h4>+91 98756-78954</h4>
                   </div>
                 </div>
               </div>
@@ -54,8 +54,8 @@ const About = () => {
           </Row>
         </Container>
       </section>
-
-      <BecomeDriverSection />
+{/* 
+      <BecomeDriverSection /> */}
 
       <section>
         <Container>

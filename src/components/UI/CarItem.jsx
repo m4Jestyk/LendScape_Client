@@ -11,12 +11,15 @@ const CarItem = (props) => {
 
   const fetchSellerName = async() => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/users/getuser`,
-        {
-          itemId: sellerID
-        }
-      )
-      await console.log(res);
+      // const res = await axios.post(`${process.env.REACT_APP_SERVER}/api/v1/users/getuser`,
+      //   {
+      //     itemId: sellerID
+      //   }
+      // )
+      // await console.log(res);
+
+      // const res = await axios.get(`http://localhost:8000/api/v1/users/getuser/${userId}`);
+      // setItemsBorrowed(res.data.itemsBorrowed);
     } catch (error) {
       console.log("Error in fetching Seller Name ::", error);
     }
@@ -53,12 +56,12 @@ const CarItem = (props) => {
           >
             {name}
           </h4>
-          <h6
+          {/* <h6
             className="section__title text-center"
             style={{ fontSize: "1.2rem", fontWeight: "bold", color: "#2a4365" }}
           >
             By : {seller}
-          </h6>
+          </h6> */}
           <h6
             className="rent__priceByTenure text-center mt-2"
             style={{ fontSize: "1.2rem", color: "#2d3748" }}

@@ -2,14 +2,15 @@ import React from "react";
 import "../../styles/our-member.css";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import ava01 from "../../assets/all-images/ava-1.jpg";
-import ava02 from "../../assets/all-images/ava-2.jpg";
-import ava03 from "../../assets/all-images/ava-3.jpg";
+import ava01 from "../../assets/all-images/MembersD/AJ.jpeg";
+import ava02 from "../../assets/all-images/MembersD/AM.jpeg";
+import ava03 from "../../assets/all-images/MembersD/KS.jpeg";
+import ava04 from "../../assets/all-images/MembersD/AT.jpeg";
 
 const OUR__MEMBERS = [
   {
-    name: "Jhon Doe",
-    experience: "5 years of experience",
+    name: "Atharv Joshi",
+    experience: "Full Stack Developer",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
@@ -18,8 +19,8 @@ const OUR__MEMBERS = [
   },
 
   {
-    name: "David Lisa",
-    experience: "5 years of experience",
+    name: "Ayush Mishra",
+    experience: "Frontend Developer",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
@@ -28,8 +29,8 @@ const OUR__MEMBERS = [
   },
 
   {
-    name: "Hilton King",
-    experience: "5 years of experience",
+    name: "Kanishka Sonone",
+    experience: "Frontend Developer",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
@@ -38,13 +39,13 @@ const OUR__MEMBERS = [
   },
 
   {
-    name: "Jhon Doe",
-    experience: "5 years of experience",
+    name: "Anshul Telange ",
+    experience: "Frontend Developer and Data Analyst",
     fbUrl: "#",
     instUrl: "#",
     twitUrl: "#",
     linkedinUrl: "#",
-    imgUrl: ava01,
+    imgUrl: ava04,
   },
 ];
 

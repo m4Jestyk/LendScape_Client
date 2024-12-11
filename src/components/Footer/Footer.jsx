@@ -17,8 +17,8 @@ const quickLinks = [
   },
 
   {
-    path: "/cars",
-    display: "Car Listing",
+    path: "/products",
+    display: "Product Listing",
   },
   {
     path: "/blogs",
@@ -54,10 +54,7 @@ const Footer = () => {
               </h1>
             </div>
             <p className="footer__logo-content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequuntur, distinctio, itaque reiciendis ab cupiditate harum ex
-              quam veniam, omnis expedita animi quibusdam obcaecati mollitia?
-              Delectus et ad illo recusandae temporibus?
+            LendScape is your go-to platform for renting and borrowing items within your community. Discover a smarter way to access the things you need, save money, and reduce waste—empowering connections and sustainable living for all.
             </p>
           </Col>
 
@@ -77,7 +74,7 @@ const Footer = () => {
           <Col lg="3" md="4" sm="6">
             <div className="mb-4">
               <h5 className="footer__link-title mb-4">Head Office</h5>
-              <p className="office__info">IET, DAVV , Near IT Park , Indore</p>
+              <p className="office__info">IET-DAVV , Near IT Park , Indore</p>
               <p className="office__info">Phone: +91 9131974270</p>
 
               <p className="office__info">Email: 21bit019@ietdavv.edu.in</p>
